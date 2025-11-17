@@ -1,0 +1,268 @@
+/* IMPORTA A FONTE FUTURISTA */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap');
+
+/* --- Configuração Global --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background: radial-gradient(circle at center, #020617, #000000 90%);
+  color: #e0e0e0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100vh;
+  padding: 20px;
+
+  overflow: hidden;
+  position: relative;
+}
+
+/* --- EFEITO DE PARTÍCULAS FLUTUANTES --- */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://www.transparenttextures.com/patterns/stardust.png");
+  opacity: 0.15;
+  animation: float 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes float {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-200px); }
+}
+
+/* --- Título com neon pulsante --- */
+h1 {
+  color: #0077ff;
+  font-size: 3.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+
+  text-shadow:
+    0 0 10px #0077ff,
+    0 0 20px #0077ff,
+    0 0 40px #0077ff;
+
+  animation: neonPulse 2.2s infinite ease-in-out alternate;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+@keyframes neonPulse {
+  0% {
+    text-shadow:
+      0 0 8px #0077ff,
+      0 0 20px #0077ff,
+      0 0 35px #0077ff;
+  }
+  100% {
+    text-shadow:
+      0 0 15px #00aaff,
+      0 0 40px #00aaff,
+      0 0 80px #00aaff;
+  }
+}
+
+p {
+  font-size: 1.1rem;
+  color: #aaccff;
+  max-width: 400px;
+  text-align: center;
+  margin-bottom: 25px;
+  opacity: 0;
+  animation: fadeIn 0.8s forwards ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+/* --- Formulário --- */
+p:has(input) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 330px;
+  margin-bottom: 18px;
+}
+
+/* INPUT FUTURISTA */
+input[type="number"] {
+  font-family: 'Rajdhani', sans-serif;
+  background: linear-gradient(145deg, #0f1423, #1a1e30);
+  border: 2px solid #0077ff;
+  color: #ffffff;
+  padding: 12px 15px;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  width: 130px;
+
+  transition: all 0.3s ease;
+
+  animation: fadeIn 1.2s forwards ease;
+  opacity: 0;
+
+  appearance: textfield;
+  -moz-appearance: textfield;
+  -webkit-appearance: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+/* FOCUS ANIMADO */
+input[type="number"]:focus {
+  outline: none;
+  border-color: #aaddff;
+  box-shadow:
+    0 0 8px #aaddff,
+    0 0 20px #aaddff;
+  transform: scale(1.03);
+}
+
+/* -------------------------------------------------------- */
+/* BOTÃO CALCULAR - VERSÃO AZUL NEON      */
+/* -------------------------------------------------------- */
+
+button#calcular {
+  position: relative;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  /* --- CORES E FORMA ATUALIZADAS --- */
+  background: transparent;           /* Fundo transparente */
+  color: #aaddff;                 /* Texto azul claro */
+  border: 2px solid #0077ff;       /* Borda azul neon escura */
+  border-radius: 6px;              /* BORDAS LEVEMENTE ARREDONDADAS */
+  /* --- FIM DA ATUALIZAÇÃO --- */
+
+  cursor: pointer;
+  padding: 12px 32px;
+  margin-top: 24px;
+  
+  transition: all .3s ease-in-out;
+  
+  /* Efeito neon base (mais sutil) */
+  box-shadow: 
+    0 0 5px #0077ff,
+    0 0 10px #0077ff;
+  
+  /* Animação de pulso neon */
+  animation: neonPulseButton 2.2s infinite ease-in-out alternate;
+}
+
+/* Animação de pulso para o botão (sincronizada com o H1) */
+@keyframes neonPulseButton {
+  0% {
+    box-shadow: 0 0 8px #0077ff, 0 0 20px #0077ff;
+    border-color: #0077ff;
+  }
+  100% {
+    box-shadow: 0 0 15px #00aaff, 0 0 40px #00aaff;
+    border-color: #00aaff;
+  }
+}
+
+/* HOVER com azul claro (como no input) */
+button#calcular:hover {
+  background: #aaddff;             /* Fundo azul claro */
+  color: #000000;                 /* Texto preto para contraste */
+  border-color: #aaddff;           /* Borda da mesma cor do fundo */
+  
+  /* Efeito neon mais intenso no hover */
+  box-shadow: 
+    0 0 10px #aaddff,
+    0 0 25px #aaddff,
+    0 0 40px #aaddff;
+    
+  transform: scale(1.05);
+}
+
+/* Clique */
+button#calcular:active {
+  transform: scale(0.98); /* Efeito de clique */
+  transition: transform 0.1s ease;
+}
+
+/* --- Resultado --- */
+#resultado {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #00aaff;
+
+  text-shadow: 0 0 8px #00aaff;
+
+  margin-top: 30px;
+  min-height: 1.5em;
+
+  animation: fadeIn 1.6s forwards ease;
+  opacity: 0;
+}
+
+/* Animação suave do resultado (removida a duplicada, usando a fadeIn) */
+/* Se quiser a animação específica para o resultado, pode usar a classe JS */
+.resultado-animado {
+  animation: aparecerResultado 1.6s ease-out forwards;
+}
+
+@keyframes aparecerResultado {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+    text-shadow: 0 0 0px #00aaff;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    text-shadow: 0 0 12px #00aaff;
+  }
+}
+
+
+/* RODAPÉ */
+body > h3:last-of-type {
+  font-weight: 400;
+  color: #ffffff;
+  margin-top: 35px;
+  font-size: 0.9rem;
+
+  animation: fadeIn 2s forwards ease;
+  opacity: 0;
+}
+
+/* -------------------------------------------------------- */
+/* RESPONSIVIDADE                                         */
+/* -------------------------------------------------------- */
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 2.3rem;
+  }
+
+  input[type="number"] {
+    width: 100px;
+  }
+
+  button#calcular {
+    width: 180px;
+    font-size: 1rem;
+  }
+}

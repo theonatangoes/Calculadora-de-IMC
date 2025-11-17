@@ -1,0 +1,70 @@
+/* ============================
+   RESPONSIVIDADE AJUSTADA
+   ============================ */
+
+@media (max-width: 768px) {
+
+  body {
+    padding: 15px;
+  }
+
+  /* TÍTULO — fica um pouco menor, mas ainda destacado */
+  h1 {
+    font-size: 2.6rem;  /* antes estava muito pequeno */
+  }
+
+  p {
+    font-size: 1rem;
+    max-width: 90%;
+  }
+
+  /* Inputs em coluna no mobile */
+  p:has(input) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  input[type="number"] {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px 12px;
+  }
+
+  /* BOTÃO — não ocupa mais 100% da tela */
+  button#calcular {
+    width: auto;            /* <<< MUDA TUDO AQUI */
+    padding: 10px 22px;
+    font-size: 1.1rem;       /* menor que antes */
+    align-self: center;
+  }
+
+  #resultado {
+    font-size: 1.3rem;
+  }
+}
+
+
+/* TELAS MUITO PEQUENAS (celulares antigos) */
+@media (max-width: 480px) {
+
+  /* Deixa o título mais legível */
+  h1 {
+    font-size: 2.3rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+
+  button#calcular {
+    padding: 10px 20px;
+    font-size: 1.05rem;
+  }
+
+  #resultado {
+    font-size: 1.15rem;
+  }
+}
