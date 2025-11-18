@@ -237,6 +237,23 @@
     .no-dividers {
       border: none !important;
     }
+
+    /* CORREÇÃO: Estilo para o texto da plataforma em mobile */
+    .platform-text {
+      font-size: 0.75rem;
+      line-height: 1.2;
+      padding: 0.5rem 1rem;
+      max-width: 90%;
+      word-wrap: break-word;
+    }
+
+    @media (min-width: 768px) {
+      .platform-text {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+        max-width: none;
+      }
+    }
   </style>
 
   <script>
@@ -304,10 +321,11 @@
   <div class="glow-3"></div>
   <div class="glow-4"></div>
 
+  <!-- CORREÇÃO: Header com padding ajustado para mobile -->
   <nav class="glass-nav fixed top-0 w-full z-50 transition-all duration-300">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-      <a href="#" class="text-2xl font-bold tracking-tighter text-white flex items-center gap-2 group">
-        <i data-feather="activity" class="text-neon group-hover:text-neon-light transition-colors"></i>
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6 py-4">
+      <a href="#" class="text-xl sm:text-2xl font-bold tracking-tighter text-white flex items-center gap-2 group">
+        <i data-feather="activity" class="text-neon group-hover:text-neon-light transition-colors w-4 h-4 sm:w-5 sm:h-5"></i>
         Body<span class="text-neon group-hover:shadow-[0_0_20px_rgba(0,123,255,0.5)] transition-all duration-300">Balance</span>
       </a>
 
@@ -317,70 +335,72 @@
         <a href="#footer" class="hover:text-neon transition-colors">Sobre</a>
       </div>
 
-      <button id="mobile-menu-btn" class="md:hidden text-white hover:text-neon focus:outline-none">
-        <i data-feather="menu"></i>
+      <button id="mobile-menu-btn" class="md:hidden text-white hover:text-neon focus:outline-none p-2">
+        <i data-feather="menu" class="w-5 h-5"></i>
       </button>
     </div>
 
-    <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-black/80 backdrop-blur-xl animate-slide-up">
-      <div class="flex flex-col p-6 space-y-4 text-center font-medium">
-        <a href="index.html" class="block py-2 text-white hover:text-neon transition-colors border-b border-white/5">Acessar Ferramenta</a>
-        <a href="#info" class="block py-2 text-white hover:text-neon transition-colors border-b border-white/5">Conhecimento</a>
-        <a href="#footer" class="block py-2 text-white hover:text-neon transition-colors">Sobre</a>
+    <!-- CORREÇÃO: Menu mobile melhorado -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-black/95 backdrop-blur-xl animate-slide-up">
+      <div class="flex flex-col p-4 space-y-3 text-center font-medium">
+        <a href="calculadora.html" class="block py-3 text-white hover:text-neon transition-colors border-b border-white/5 hover:bg-white/5 rounded-lg">Acessar Ferramenta</a>
+        <a href="#info" class="block py-3 text-white hover:text-neon transition-colors border-b border-white/5 hover:bg-white/5 rounded-lg">Conhecimento</a>
+        <a href="#footer" class="block py-3 text-white hover:text-neon transition-colors hover:bg-white/5 rounded-lg">Sobre</a>
       </div>
     </div>
   </nav>
 
-  <section class="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+  <section class="relative min-h-screen flex items-center justify-center px-4 overflow-hidden pt-20">
     <div class="absolute top-1/4 left-10 w-96 h-96 bg-neon/30 rounded-full blur-[120px] -z-10 animate-pulse-slow"></div>
     <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-blue-600/25 rounded-full blur-[120px] -z-10 animate-pulse-slow" style="animation-delay: 1s;"></div>
     <div class="absolute top-1/2 left-1/3 w-80 h-80 bg-cyan-500/20 rounded-full blur-[100px] -z-10 animate-pulse-slow" style="animation-delay: 2s;"></div>
 
-    <div class="max-w-5xl mx-auto text-center z-10 animate-slide-up mt-10">
+    <div class="max-w-5xl mx-auto text-center z-10 animate-slide-up">
 
-      <div class="glass-card inline-flex items-center justify-center px-4 py-2 mb-6 rounded-full animate-float max-w-full mx-auto">
-        <span class="text-neon text-xs md:text-sm font-semibold tracking-wider uppercase text-center whitespace-normal break-words leading-tight">
+      <!-- CORREÇÃO: Texto da plataforma ajustado para mobile -->
+      <div class="glass-card inline-flex items-center justify-center mb-6 rounded-full animate-float mx-auto">
+        <span class="platform-text text-neon font-semibold tracking-wider uppercase text-center">
           Plataforma de Saúde & Performance
         </span>
       </div>
 
-      <h1 class="text-5xl md:text-7xl font-extrabold mb-8 leading-tight">
+      <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-8 leading-tight">
         Conheça seu corpo,<br>
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon to-cyan-400 neon-text">
           Domine seus limites.
         </span>
       </h1>
 
-      <p class="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+      <p class="text-base sm:text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
         Acesso instantâneo a ferramentas profissionais de IMC e Taxa Metabólica Basal.
         Entenda seus números e alcance o equilíbrio perfeito.
       </p>
 
       <div class="flex flex-col sm:flex-row justify-center gap-6 items-center">
-        <a href="calculadora.html" class="group relative px-10 py-5 bg-neon text-black font-bold rounded-xl overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_50px_rgba(0,123,255,0.5)] text-lg">
+        <a href="calculadora.html" class="group relative px-8 sm:px-10 py-4 sm:py-5 bg-neon text-black font-bold rounded-xl overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_50px_rgba(0,123,255,0.5)] text-base sm:text-lg w-full sm:w-auto text-center">
           <div class="absolute inset-0 w-full h-full bg-white/30 group-hover:translate-x-full transition-transform duration-500 -skew-x-12 -ml-4"></div>
-          <span class="relative flex items-center gap-2">
+          <span class="relative flex items-center gap-2 justify-center">
             ACESSAR CALCULADORAS <i data-feather="arrow-right" class="w-5 h-5"></i>
           </span>
         </a>
 
-        <a href="#info" class="glass-button px-8 py-4 text-gray-300 font-semibold hover:text-white transition-all flex items-center gap-2 rounded-full">
+        <a href="#info" class="glass-button px-6 sm:px-8 py-3 sm:py-4 text-gray-300 font-semibold hover:text-white transition-all flex items-center gap-2 rounded-full w-full sm:w-auto justify-center">
           <span>Entenda a Ciência</span>
         </a>
       </div>
 
-      <div class="mt-16 grid grid-cols-3 gap-8 pt-8 max-w-3xl mx-auto no-dividers">
+      <div class="mt-16 grid grid-cols-3 gap-4 sm:gap-8 pt-8 max-w-3xl mx-auto no-dividers">
         <div>
-          <p class="text-3xl font-bold text-white">100%</p>
-          <p class="text-sm text-gray-500">Gratuito</p>
+          <p class="text-2xl sm:text-3xl font-bold text-white">100%</p>
+          <p class="text-xs sm:text-sm text-gray-500">Gratuito</p>
         </div>
         <div>
-          <p class="text-3xl font-bold text-white">Preciso</p>
-          <p class="text-sm text-gray-500">Dados Científicos</p>
+          <p class="text-2xl sm:text-3xl font-bold text-white">Preciso</p>
+          <p class="text-xs sm:text-sm text-gray-500">Dados Científicos</p>
         </div>
         <div>
-          <p class="text-3xl font-bold text-white">Rápido</p>
-          <p class="text-sm text-gray-500">Resultado Instantâneo</p>
+          <p class="text-2xl sm:text-3xl font-bold text-white">Rápido</p>
+          <p class="text-xs sm:text-sm text-gray-500">Resultado Instantâneo</p>
         </div>
       </div>
     </div>
@@ -392,28 +412,28 @@
 
     <div class="max-w-6xl mx-auto px-4 relative z-10">
       <div class="mb-16 pl-4 border-l-4 border-neon">
-        <h2 class="text-4xl font-bold text-white">Saúde e <span class="text-neon">Conhecimento</span></h2>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white">Saúde e <span class="text-neon">Conhecimento</span></h2>
         <p class="text-gray-400 mt-2">Por que calcular seus índices é importante?</p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-8">
 
-        <div class="glass-card p-8 rounded-2xl animate-slide-up hover:border-neon/50 transition-colors group">
+        <div class="glass-card p-6 sm:p-8 rounded-2xl animate-slide-up hover:border-neon/50 transition-colors group">
           <div class="w-12 h-12 bg-neon/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-neon/20 transition-colors">
             <i data-feather="user" class="text-neon"></i>
           </div>
-          <h3 class="text-2xl font-bold mb-4 text-white">Autoconhecimento</h3>
+          <h3 class="text-xl sm:text-2xl font-bold mb-4 text-white">Autoconhecimento</h3>
           <div class="space-y-4 text-gray-400 leading-relaxed">
             <p>Conhecer seu corpo é o primeiro passo. O IMC e a TMB são bússolas que indicam onde você está e para onde pode ir.</p>
             <p>Saúde não é sobre extremos. É sobre encontrar o <span class="text-neon font-medium">equilíbrio sustentável</span> para sua rotina.</p>
           </div>
         </div>
 
-        <div class="glass-card p-8 rounded-2xl animate-slide-up delay-100 hover:border-red-500/50 transition-colors group">
+        <div class="glass-card p-6 sm:p-8 rounded-2xl animate-slide-up delay-100 hover:border-red-500/50 transition-colors group">
           <div class="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-red-500/20 transition-colors">
             <i data-feather="alert-circle" class="text-red-500"></i>
           </div>
-          <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-red-400 transition-colors">Riscos da Obesidade</h3>
+          <h3 class="text-xl sm:text-2xl font-bold mb-4 text-white group-hover:text-red-400 transition-colors">Riscos da Obesidade</h3>
           <p class="text-gray-400 mb-4">A obesidade vai além da estética, aumentando riscos silenciosos:</p>
           <ul class="space-y-2 text-gray-400">
             <li class="flex items-center gap-2"><i data-feather="check" class="w-4 h-4 text-red-500"></i> Doenças cardiovasculares</li>
@@ -422,11 +442,11 @@
           </ul>
         </div>
 
-        <div class="glass-card p-8 rounded-2xl animate-slide-up delay-200 hover:border-yellow-500/50 transition-colors group">
+        <div class="glass-card p-6 sm:p-8 rounded-2xl animate-slide-up delay-200 hover:border-yellow-500/50 transition-colors group">
           <div class="w-12 h-12 bg-yellow-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-yellow-500/20 transition-colors">
             <i data-feather="wind" class="text-yellow-500"></i>
           </div>
-          <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-yellow-400 transition-colors">Magreza Extrema</h3>
+          <h3 class="text-xl sm:text-2xl font-bold mb-4 text-white group-hover:text-yellow-400 transition-colors">Magreza Extrema</h3>
           <p class="text-gray-400 mb-4">O déficit calórico excessivo também cobra seu preço:</p>
           <ul class="space-y-2 text-gray-400">
             <li class="flex items-center gap-2"><i data-feather="check" class="w-4 h-4 text-yellow-500"></i> Baixa imunidade</li>
@@ -435,11 +455,11 @@
           </ul>
         </div>
 
-        <div class="glass-card p-8 rounded-2xl animate-slide-up delay-300 hover:border-neon/50 transition-colors group">
+        <div class="glass-card p-6 sm:p-8 rounded-2xl animate-slide-up delay-300 hover:border-neon/50 transition-colors group">
           <div class="w-12 h-12 bg-neon/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-neon/20 transition-colors">
             <i data-feather="trending-up" class="text-neon"></i>
           </div>
-          <h3 class="text-2xl font-bold mb-4 text-white">Dietas & Estratégia</h3>
+          <h3 class="text-xl sm:text-2xl font-bold mb-4 text-white">Dietas & Estratégia</h3>
           <div class="space-y-4 text-gray-400 leading-relaxed">
             <p>Restrição severa gera efeito sanfona. O segredo é a constância.</p>
             <p>Use sua <span class="text-white font-bold">TMB</span> calculada em nossa ferramenta como base. Para perder peso, crie um déficit leve (300-500kcal).</p>
@@ -449,8 +469,8 @@
       </div>
 
       <div class="mt-20 text-center">
-        <h3 class="text-2xl font-bold text-white mb-6">Pronto para descobrir seus números?</h3>
-        <a href="calculadora.html" class="glass-button inline-flex items-center gap-2 px-8 py-3 text-neon rounded-full hover:bg-neon hover:text-black transition-all font-bold">
+        <h3 class="text-xl sm:text-2xl font-bold text-white mb-6">Pronto para descobrir seus números?</h3>
+        <a href="calculadora.html" class="glass-button inline-flex items-center gap-2 px-6 sm:px-8 py-3 text-neon rounded-full hover:bg-neon hover:text-black transition-all font-bold">
           Ir para Calculadora <i data-feather="external-link" class="w-4 h-4"></i>
         </a>
       </div>
@@ -477,6 +497,14 @@
 
     mobileMenuBtn.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
+    });
+
+    // Fechar menu ao clicar em um link (mobile)
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
     });
 
     // Canvas aprimorado para efeito de fundo com mais partículas
