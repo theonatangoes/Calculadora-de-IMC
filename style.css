@@ -1,7 +1,15 @@
-/* IMPORTA A FONTE FUTURISTA */
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
 /* --- Configuração Global --- */
+:root {
+  --neon-primary: #007bff; /* Azul Neon Principal */
+  --neon-hover: #66b2ff; /* Azul Clarinho para o Hover */
+  --dark-bg: #000000; /* Fundo Preto Puro */
+  --card-bg: rgba(10, 10, 10, 0.75); /* Fundo do cartão levemente mais opaco */
+  --text-main: #e0e0e0;
+  --text-muted: #a0a0a0;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,260 +17,276 @@
 }
 
 body {
-  font-family: 'Rajdhani', sans-serif;
-  background: radial-gradient(circle at center, #020617, #000000 90%);
-  color: #e0e0e0;
-
+  font-family: "Poppins", sans-serif;
+  background-color: var(--dark-bg);
+  color: var(--text-main);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-
   min-height: 100vh;
-  padding: 20px;
-
-  overflow: hidden;
+  padding: 40px 20px;
   position: relative;
+  overflow-x: hidden; /* Evita rolagem lateral, permite vertical */
 }
 
-/* --- EFEITO DE PARTÍCULAS FLUTUANTES --- */
-body::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("https://www.transparenttextures.com/patterns/stardust.png");
-  opacity: 0.15;
-  animation: float 20s linear infinite;
-  pointer-events: none;
+/* Canvas do WebGL (O Fundo Animado) */
+#shader-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
-@keyframes float {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-200px); }
+/* --- Wrapper Geral (Segura as duas calculadoras) --- */
+.wrapper-geral {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start; /* Alinha no topo */
+  gap: 30px;
+  width: 100%;
+  max-width: 1100px;
+  z-index: 1;
+  flex-wrap: wrap; /* Permite quebrar linha em telas menores */
 }
 
-/* --- Título com neon pulsante --- */
+/* --- Cartões das Calculadoras --- */
+.container {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 123, 255, 0.2);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 450px; /* Tamanho limite de cada caixa */
+  position: relative;
+  animation: slideUp 0.8s ease-out forwards;
+  display: flex;
+  flex-direction: column;
+}
+
 h1 {
-  color: #0077ff;
-  font-size: 3.2rem;
+  color: var(--neon-primary);
+  font-size: 2rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-
-  text-shadow:
-    0 0 10px #0077ff,
-    0 0 20px #0077ff,
-    0 0 40px #0077ff;
-
-  animation: neonPulse 2.2s infinite ease-in-out alternate;
-  margin-bottom: 15px;
   text-align: center;
-}
-
-@keyframes neonPulse {
-  0% {
-    text-shadow:
-      0 0 8px #0077ff,
-      0 0 20px #0077ff,
-      0 0 35px #0077ff;
-  }
-  100% {
-    text-shadow:
-      0 0 15px #00aaff,
-      0 0 40px #00aaff,
-      0 0 80px #00aaff;
-  }
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
 }
 
 p {
-  font-size: 1.1rem;
-  color: #aaccff;
-  max-width: 400px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
   text-align: center;
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+/* --- Inputs e Selects --- */
+.input-group {
+  display: flex;
+  flex-direction: row; /* Coloca inputs um ao lado do outro */
+  gap: 15px;
   margin-bottom: 25px;
-  opacity: 0;
-  animation: fadeIn 0.8s forwards ease;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1; /* Faz os inputs ocuparem espaço igual */
+}
+
+.input-field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--neon-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Estilo unificado para Inputs e Selects */
+input[type="number"],
+select {
+  font-family: "Poppins", sans-serif;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #fff;
+  padding: 14px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+/* Corrigir fundo das opções do select (para não ficar branco) */
+select option {
+  background-color: #000;
+  color: #fff;
+}
+
+input[type="number"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--neon-primary);
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+  background: rgba(0, 10, 25, 0.9);
+}
+
+/* --- Botões --- */
+button {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  background: var(--neon-primary);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 16px;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 123, 255, 0.25);
+  margin-top: auto; /* Empurra o botão para baixo se sobrar espaço */
+}
+
+button:hover {
+  background: var(--neon-hover); /* O azul clarinho solicitado */
+  box-shadow: 0 0 35px rgba(0, 123, 255, 0.7);
+  transform: translateY(-3px);
+  color: #fff; /* Texto branco no hover para contraste com azul claro */
+}
+
+/* --- Resultados --- */
+.result-container {
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 4px solid var(--neon-primary);
+  border-radius: 6px;
+  padding: 20px;
+  margin-top: 25px;
+  display: none; /* Oculto por padrão */
+}
+
+.result-container.show {
+  display: block;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+#resultado-imc,
+#resultado-tmb {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.res-item {
+  margin-bottom: 15px;
+  text-align: center;
+  color: #e0e0e0;
+  font-size: 1rem;
+}
+
+.res-item strong {
+  display: block;
+  font-size: 1.4rem;
+  color: #fff;
+  margin-top: 5px;
+}
+
+.res-item.highlight strong {
+  color: var(--neon-hover); /* Destaque para o NDC */
+  text-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+}
+
+.classification {
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
+  color: var(--text-muted);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Footer Fixo Inferior --- */
+.footer-dev {
+  position: fixed;
+  bottom: 0; /* GRUDA NO FUNDO DE VERDADE */
+  left: 0;
+  width: 100%; /* GARANTE QUE A LARGURA ACOMPANHE A TELA */
+  text-align: center;
+  padding: 10px 0;
+
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border-top: 1px solid rgba(0, 123, 255, 0.35);
+  text-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+
+  z-index: 9999; /* PARA FICAR ACIMA DE TUDO */
+}
+
+.footer-dev span {
+  color: var(--neon-primary);
+  font-weight: 600;
+}
+
+/* --- Animações --- */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0);   }
-}
-
-/* --- Formulário --- */
-p:has(input) {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 330px;
-  margin-bottom: 18px;
-}
-
-/* INPUT FUTURISTA */
-input[type="number"] {
-  font-family: 'Rajdhani', sans-serif;
-  background: linear-gradient(145deg, #0f1423, #1a1e30);
-  border: 2px solid #0077ff;
-  color: #ffffff;
-  padding: 12px 15px;
-  border-radius: 6px;
-  font-size: 1.05rem;
-  width: 130px;
-
-  transition: all 0.3s ease;
-
-  animation: fadeIn 1.2s forwards ease;
-  opacity: 0;
-
-  appearance: textfield;
-  -moz-appearance: textfield;
-  -webkit-appearance: none;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-}
-
-/* FOCUS ANIMADO */
-input[type="number"]:focus {
-  outline: none;
-  border-color: #aaddff;
-  box-shadow:
-    0 0 8px #aaddff,
-    0 0 20px #aaddff;
-  transform: scale(1.03);
-}
-
-/* -------------------------------------------------------- */
-/* BOTÃO CALCULAR - VERSÃO AZUL NEON      */
-/* -------------------------------------------------------- */
-
-button#calcular {
-  position: relative;
-  font-family: 'Rajdhani', sans-serif;
-  font-weight: 700;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-
-  /* --- CORES E FORMA ATUALIZADAS --- */
-  background: transparent;           /* Fundo transparente */
-  color: #aaddff;                 /* Texto azul claro */
-  border: 2px solid #0077ff;       /* Borda azul neon escura */
-  border-radius: 6px;              /* BORDAS LEVEMENTE ARREDONDADAS */
-  /* --- FIM DA ATUALIZAÇÃO --- */
-
-  cursor: pointer;
-  padding: 12px 32px;
-  margin-top: 24px;
-  
-  transition: all .3s ease-in-out;
-  
-  /* Efeito neon base (mais sutil) */
-  box-shadow: 
-    0 0 5px #0077ff,
-    0 0 10px #0077ff;
-  
-  /* Animação de pulso neon */
-  animation: neonPulseButton 2.2s infinite ease-in-out alternate;
-}
-
-/* Animação de pulso para o botão (sincronizada com o H1) */
-@keyframes neonPulseButton {
-  0% {
-    box-shadow: 0 0 8px #0077ff, 0 0 20px #0077ff;
-    border-color: #0077ff;
-  }
-  100% {
-    box-shadow: 0 0 15px #00aaff, 0 0 40px #00aaff;
-    border-color: #00aaff;
-  }
-}
-
-/* HOVER com azul claro (como no input) */
-button#calcular:hover {
-  background: #aaddff;             /* Fundo azul claro */
-  color: #000000;                 /* Texto preto para contraste */
-  border-color: #aaddff;           /* Borda da mesma cor do fundo */
-  
-  /* Efeito neon mais intenso no hover */
-  box-shadow: 
-    0 0 10px #aaddff,
-    0 0 25px #aaddff,
-    0 0 40px #aaddff;
-    
-  transform: scale(1.05);
-}
-
-/* Clique */
-button#calcular:active {
-  transform: scale(0.98); /* Efeito de clique */
-  transition: transform 0.1s ease;
-}
-
-/* --- Resultado --- */
-#resultado {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #00aaff;
-
-  text-shadow: 0 0 8px #00aaff;
-
-  margin-top: 30px;
-  min-height: 1.5em;
-
-  animation: fadeIn 1.6s forwards ease;
-  opacity: 0;
-}
-
-/* Animação suave do resultado (removida a duplicada, usando a fadeIn) */
-/* Se quiser a animação específica para o resultado, pode usar a classe JS */
-.resultado-animado {
-  animation: aparecerResultado 1.6s ease-out forwards;
-}
-
-@keyframes aparecerResultado {
-  0% {
+  from {
     opacity: 0;
-    transform: translateY(10px) scale(0.95);
-    text-shadow: 0 0 0px #00aaff;
   }
-  100% {
+  to {
     opacity: 1;
-    transform: translateY(0) scale(1);
-    text-shadow: 0 0 12px #00aaff;
   }
 }
 
+/* --- Responsivo --- */
+@media (max-width: 900px) {
+  .wrapper-geral {
+    flex-direction: column;
+    align-items: center;
+  }
 
-/* RODAPÉ */
-body > h3:last-of-type {
-  font-weight: 400;
-  color: #ffffff;
-  margin-top: 35px;
-  font-size: 0.9rem;
-
-  animation: fadeIn 2s forwards ease;
-  opacity: 0;
+  .container {
+    max-width: 100%;
+  }
 }
 
-/* -------------------------------------------------------- */
-/* RESPONSIVIDADE                                         */
-/* -------------------------------------------------------- */
+@media (max-width: 480px) {
+  .input-group {
+    flex-direction: column; /* Em celulares muito pequenos, empilha os inputs */
+  }
 
-@media (max-width: 500px) {
   h1 {
-    font-size: 2.3rem;
+    font-size: 1.6rem;
   }
 
-  input[type="number"] {
-    width: 100px;
-  }
-
-  button#calcular {
-    width: 180px;
+  button {
+    padding: 14px;
     font-size: 1rem;
   }
 }
